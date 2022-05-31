@@ -5,19 +5,6 @@ CREATE TABLE enrollment (
 PRIMARY KEY (student_id)
 );
 
-CREATE TABLE MAP_Scores (
-	student_id INT NOT NULL,
-	year INT NOT NULL,
-	map_term VARCHAR NOT NULL,
-	subject VARCHAR NOT NULL,
-	rit_score INT NOT NULL,
-	percentile INT NOT NULL,
-	quartile INT NOT NULL,
-	typical_fall_to_spring_growth INT NOT NULL,
-PRIMARY KEY (student_id),
-FOREIGN KEY (student_id) REFERENCES enrollment (student_id)
-);
-
 CREATE TABLE Special_Programs (
 	student_id INT NOT NULL,
 	program_name VARCHAR NOT NULL,
@@ -26,9 +13,6 @@ FOREIGN KEY (student_id) REFERENCES enrollment (student_id)
 
 );
 
-DROP TABLE enrollment CASCADE;
-DROP TABLE map_scores CASCADE;
-DROP TABLE special_programs CASCADE;
 
 SELECT * FROM enrollment;
 SELECT * FROM map_scores;
