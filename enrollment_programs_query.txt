@@ -1,0 +1,47 @@
+CREATE TABLE enrollment (
+	student_id INT NOT NULL,
+	school_name VARCHAR NOT NULL,
+	grade_level_2019 INT NOT NULL,
+PRIMARY KEY (student_id)
+);
+
+CREATE TABLE MAP_Scores (
+	student_id INT NOT NULL,
+	year INT NOT NULL,
+	map_term VARCHAR NOT NULL,
+	subject VARCHAR NOT NULL,
+	rit_score INT NOT NULL,
+	percentile INT NOT NULL,
+	quartile INT NOT NULL,
+	typical_fall_to_spring_growth INT NOT NULL,
+PRIMARY KEY (student_id),
+FOREIGN KEY (student_id) REFERENCES enrollment (student_id)
+);
+
+CREATE TABLE Special_Programs (
+	student_id INT NOT NULL,
+	program_name VARCHAR NOT NULL,
+PRIMARY KEY (student_id),
+FOREIGN KEY (student_id) REFERENCES enrollment (student_id)
+
+);
+
+DROP TABLE enrollment CASCADE;
+DROP TABLE map_scores CASCADE;
+DROP TABLE special_programs CASCADE;
+
+SELECT * FROM enrollment;
+SELECT * FROM map_scores;
+SELECT * FROM special_programs;
+
+-- join enrollment & special programs tables
+SELECT enrollment.student_id,
+	enrollment.school_name,
+	enrollment.grade_level_2019,
+	special_programs.program_name
+INTO enrollment_programs
+FROM enrollment
+JOIN special_programs
+ON enrollment.student_id = special_programs.student_id;
+
+SELECT * FROM enrollment_programs;
